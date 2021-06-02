@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elite.springbootbootstrap.mapper.DeptmentMapper">
+    <!--查询科室列表-->
+    <select id="getDeptList"  resultType="com.elite.springbootbootstrap.model.Deptment">
+        select * from deptment
+    </select>
+    <!--根据科室id查询科室-->
+    <select id="getDeptmentByDeptID" parameterType="java.lang.String" resultType="com.elite.springbootbootstrap.model.Deptment">
+        select  * from deptment where deptno = #{deptid,jdbcType=VARCHAR}
+    </select>
+</mapper>

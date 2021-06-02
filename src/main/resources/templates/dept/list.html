@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css" th:href="@{/css/dashboard.css}"/>
+</head>
+<body>
+<!--引入抽取的topbar-->
+<!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
+<div th:replace="commons/bar::topbar"></div>
+<div class="container-fluid">
+    <div class="row">
+        <!--引入侧边栏-->
+        <div th:replace="commons/bar::#sidebarMenu(activeUri='depts')"></div>
+
+        <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h2><a class="btn btn-sm btn-success" href="dept" th:href="@{/dept}">员工添加</a></h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>deptno</th>
+                        <th>deptname</th>
+                        <th>dept_descript</th>
+                        <th>dept_address</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dept:${depts}">
+                        <td th:text="${dept.id}"></td>
+                        <td>[[${dept.deptno}]]</td>
+                        <td th:text="${dept.deptname}"></td>
+                        <td th:text="${dept.dept_descript}"></td>
+                        <td th:text="${dept.dept_address}"></td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/dept/}+${dept.id}">编辑</a>
+                            <button th:attr="del_uri=@{/dept/}+${dept.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <form id="deleteEmpForm"  method="post">
+            <input type="hidden" name="_method" value="delete"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>
